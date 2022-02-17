@@ -3,11 +3,16 @@ title: Shell fu
 author: Jan Waś
 ...
 
+# history search
+
+* backward: ctrl+r
+* forward: ctrl+s
+
 # fzf
 
-* fuzzy search in Ctrl+R
+* fuzzy search in ctrl+r
 * easy to install, no config
-* fuzzy file autocomplete with Ctrl+T
+* fuzzy file autocomplete with ctrl+t
 
 # ag
 
@@ -23,9 +28,9 @@ author: Jan Waś
 motion         | bash (emacs)  | Windows         | MacOS
 ---------------|----------------|----------------|--------
 forward word   | alt+f         | ctrl+left       | alt+left
-backwarda word | alt+b         | ctlr+right      | alt+right
-home           | alt+a         | home            | cmd+left
-end            | alt+e         | end             | cmd+right
+backward word  | alt+b         | ctlr+right      | alt+right
+home           | ctrl+a        | home            | cmd+left
+end            | ctrl+e        | end             | cmd+right
 delete word    | alt+backspace | ctrl+backspace  | alt+backspace
 kill-line      | ctrl+k        | ¯\\\_(ツ)\_/¯      | ¯\\\_(ツ)\_/¯
 
