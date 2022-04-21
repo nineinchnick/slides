@@ -8,6 +8,7 @@ author: Jan Waś
 * initial version took a week
 * git data model
 * timestamp packing
+* authors with multiple names and emails
 
 # trino-github
 
