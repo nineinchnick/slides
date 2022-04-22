@@ -62,3 +62,4 @@ author: Jan Waś
 * trino-imap
 * trino-graphql
 * trino-jira
+* trino-cloud - add cloudwatch metrics
