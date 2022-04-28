@@ -6,24 +6,36 @@ author: Jan Waś
 # trino-git
 
 * https://github.com/nineinchnick/trino-git
-* initial version in a week
 * git data model
-* timestamp packing
+* jgit
+
+# trino-git
+
+* initial version in a week
+* learned timestamp packing
 * authors with multiple names and emails
 
 # netezza
 
 * honorable mention - done at Starburst
 * uses base-jdbc
-* correct type mapping for both reads and writes
+* similar to PostgreSQL
 
-# trino-github
+# netezza
+
+* learned correct type mapping for both reads and writes
+
+# trino-rest
 
 * forked prestorocks/trino-rest as https://github.com/nineinchnick/trino-rest
-* DI and configuration
-* functions returning arrays of rows
-* predicate pushdown vs dynamic filtering
-* virtual columns
+* connectors that make HTTP requests: Slack, Twitter, GitHub
+
+# trino-rest-github
+
+* learned functions returning arrays of rows
+* learned DI and configuration
+* learned predicate pushdown vs dynamic filtering
+* tricks like virtual columns
 
 # RESTful APIs are terrible
 
@@ -33,19 +45,29 @@ author: Jan Waś
 * incomplete documentation
 * secondary rate limits
 
+```
+% wc -l trino-rest-github/src/main/java/pl/net/was/rest/github/Sync.java
+    1364 trino-rest-github/src/main/java/pl/net/was/rest/github/Sync.java
+```
+
 # trino-cloud
 
 * https://github.com/nineinchnick/trino-cloud
+* interact with cloud provider objects, like EC2 instances, S3 buckets
+
+# trino-cloud-aws
+
 * initial commit in two hours
 * MVP in two days
-* AWS SDK is designed for this:
+* learned that AWS SDK is designed for this:
   * data models map 1:1
   * new tables require a single line
-* writes!
+* learned `INSERT`, `UPDATE`, and `DELETE`
 
 # trino-plugin-archetype
 
 * https://github.com/nineinchnick/trino-plugin-archetype/
+* 1 year since first connector
 * from zero to hero in 2 minutes
 * very opinionated (GitHub workflows)
 
@@ -53,9 +75,12 @@ author: Jan Waś
 
 * https://github.com/nineinchnick/trino-faker/
 * datafaker forked from java-faker
-* column properties vs check constraints
-* more predicate pushdowns
-* more page/block writing
+
+# trino-faker
+
+* learned table and column properties vs check constraints
+* learned more data type internal representation
+* learned more page/block writing
 
 # future
 
