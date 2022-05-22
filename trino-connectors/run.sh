@@ -21,10 +21,11 @@ echo "🚀 Starting the $name container"
 docker run \
     -d \
     --name $name \
-    -p 8080:8080 \
+    -p 8081:8080 \
     -e AWS_REGION=eu-central-1 \
     -e AWS_PROFILE=infotech \
     -v "$HOME"/.aws:/home/trino/.aws \
+    -v "$HOME"/Downloads:/downloads \
     -e REPO_URL \
     -e GITHUB_TOKEN \
     -e SLACK_TOKEN \
