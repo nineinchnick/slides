@@ -1,0 +1,4 @@
+flowchart LR
+    client <-- HTTP or JDBC --> coord[Trino coordinator]
+    coord <-- HTTP --> work[1..n Trino workers]
+    work <-- HDFS, S3, JDBC, other --> data[(Data)]
