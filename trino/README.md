@@ -79,6 +79,7 @@ s3://my-bucket/prod-data
 
 <!--
 Mention: s3 or hdfs; supported file formats; supported layout
+ORC and Parquet are mini-databases with compression and indexes!
 -->
 
 # Hive, Iceberg, Delta Lake
@@ -114,6 +115,24 @@ client <-----------------> Trino coordinator <--------------> metastore
 <!--
 Hive Metastore or Glue
 -->
+
+# Example
+
+```
+connector.name=hive
+
+hive.metastore=glue
+hive.metastore.glue.region=eu-central-1
+#hive.metastore.glue.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
+#hive.metastore.glue.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
+
+hive.s3.endpoint=s3.eu-central-1.amazonaws.com
+#hive.s3.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
+#hive.s3.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
+
+hive.s3select-pushdown.enabled=true
+hive.storage-format=ORC
+```
 
 # Scaling up
 
