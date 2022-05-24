@@ -12,12 +12,14 @@ patat:
 
 # What is Trino
 
-a scalable
+A scalable
+pluggable
 ANSII SQL query engine
-a set of plugins
 
 <!--
-Some RDBMS clients can also process and join data locally
+Data virtualization - allows joining data from different sources.
+Some RDBMS clients can also process and join data locally - Tableau, Grafana.
+Reads and processes petabytes of csv, json, orc or parquet files from hdfs or s3 in Hive layout.
 -->
 
 # What Trino is not
@@ -40,6 +42,26 @@ client <-----------------> Trino coordinator
 Mention it runs on JVM
 -->
 
+# Run it
+
+```bash
+docker run \
+  -d \
+  --name trino \
+  -p8080:8080 \
+  trinodb/trino:381
+```
+
+# Query it
+
+```bash
+docker exec -it trino trino
+pip install trino[sqlalchemy]
+```
+<!--
+Or use DBeaver
+-->
+
 # What is an SQL engine
 
 OLTP
@@ -52,7 +74,7 @@ read and write amplification
 
 # Separate compute and storage
 
-Hadoop
+Spark
 InnoDB
 MyISAM
 PostgreSQL FDW
@@ -84,11 +106,13 @@ ORC and Parquet are mini-databases with compression and indexes!
 
 # Hive, Iceberg, Delta Lake
 
-Table formats.
+Table formats
+File layouts
+Data types
+Schema evolution
+Transactions
 
 <!--
-Set of conventions for layout, metadata, schema evolution, important for writing
-so data can be read back optimally.
 Hive is older and doesn't have a good spec.
 Iceberg is new.
 Delta Lake has transactions!
@@ -99,6 +123,10 @@ Delta Lake has transactions!
 Plugins for reading
 a lot of files
 from a network FS (HDFS or S3).
+
+<!--
+Great lakes
+-->
 
 # Metastore
 
@@ -123,16 +151,16 @@ connector.name=hive
 
 hive.metastore=glue
 hive.metastore.glue.region=eu-central-1
-#hive.metastore.glue.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
-#hive.metastore.glue.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
 
 hive.s3.endpoint=s3.eu-central-1.amazonaws.com
-#hive.s3.aws-access-key=${ENV:AWS_ACCESS_KEY_ID}
-#hive.s3.aws-secret-key=${ENV:AWS_SECRET_ACCESS_KEY}
 
 hive.s3select-pushdown.enabled=true
 hive.storage-format=ORC
 ```
+
+<!--
+Query time!
+-->
 
 # Scaling up
 
@@ -158,11 +186,13 @@ Other: Atop, Black Hole, Google Sheets, JMX, Local File, Memory, System, Thrift,
 # ANSII SQL
 
 Data types
-`GROUPING SET`, `ROLLUP`, `CUBE`
+Arrays
 every `JOIN`, `LATERAL`
 `WITH`, `WITH RECURSIVE`
 Window functions
+`GROUPING SET`, `ROLLUP`, `CUBE`
 `MATCH_RECOGNIZE`
+Data sketches
 
 <!--
 There is not a single DB that implements 100% of ANSII SQL.
@@ -170,14 +200,26 @@ But Trino is very close.
 Most of SQL 2016, coming up: PTF, MERGE
 -->
 
-# ETL
+# DDL and DML
 
 `INSERT`, `UPDATE`, `DELETE`
-Views and materialized views
+`CREATE TABLE AS SELECT`
+`CREATE VIEW`
+`ALTER TABLE`
 
 <!--
 MERGE coming soon
+Most implemented by plugins
 -->
+
+# Missing
+
+`INSERT ON CONFLICT`, `MERGE`
+`UPDATE FROM`, `DELETE FROM`
+`CREATE FUNCTION`
+Constraints
+Triggers
+
 
 # Query federation
 
@@ -297,7 +339,11 @@ https://commondatastorage.googleapis.com/ossf-criticality-score/index.html
 
 ```sql
 WITH ranked AS (
-  SELECT name, criticality_score, language, rank() OVER (PARTITION BY language ORDER BY criticality_score DESC) AS rank
+  SELECT
+    name,
+    criticality_score,
+    language,
+    rank() OVER (PARTITION BY language ORDER BY criticality_score DESC) AS rank
   FROM storage.csv."/downloads/all.csv"
 )
 SELECT *
