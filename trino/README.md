@@ -192,6 +192,7 @@ every `JOIN`, `LATERAL`
 Window functions
 `GROUPING SET`, `ROLLUP`, `CUBE`
 `MATCH_RECOGNIZE`
+Geospatial functions
 Data sketches
 
 <!--
@@ -385,3 +386,7 @@ WHERE name = 'trino' OR (language = 'Java' AND rank < 10);
  scikit-learn | 0.85602           | Python   |    9
 (9 rows)
 ```
+
+# Join the community
+
+https://trino.io/
